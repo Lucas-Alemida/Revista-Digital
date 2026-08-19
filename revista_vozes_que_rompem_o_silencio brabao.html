@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Vozes que Rompem o Silêncio</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700;800&display=swap');
+
+:root{
+  --wine:#641b3a;
+  --pink:#d95b82;
+  --rose:#f2b8c9;
+  --cream:#fff7ef;
+  --ink:#211b1d;
+  --purple:#4e3b69;
+  --paper:#f9eadf;
+  --lime:#c9f36b;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:linear-gradient(
+    135deg,
+    #d9d0ff,
+    #ffd9e8 50%,
+    #dff7df
+  );
+  color:var(--ink);
+  font-family:"DM Sans",sans-serif;
+}
+
+.magazine{
+  width:min(1100px,calc(100% - 30px));
+  margin:28px auto;
+  background:var(--cream);
+  box-shadow:0 20px 60px #0003;
+  overflow:hidden;
+  border-radius:18px;
+}
+
+.page{
+  min-height:780px;
+  padding:48px 58px;
+  position:relative;
+  border-bottom:5px solid var(--ink);
+  overflow:hidden;
+  background:var(--cream);
+}
+
+.cover{
+  min-height:820px;
+
+  background:
+    radial-gradient(
+      circle at 8% 15%,
+      var(--lime) 0 5%,
+      transparent 5.5%
+    ),
+    radial-gradient(
+      circle at 91% 32%,
+      #bca9ff 0 9%,
+      transparent 9.5%
+    ),
+    radial-gradient(
+      circle at 78% 82%,
+      var(--pink) 0 7%,
+      transparent 7.5%
+    ),
+    linear-gradient(
+      135deg,
+      #ffe2ef,
+      #fff9f3 52%,
+      #d9d0ff
+    );
+}
+
+.masthead{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:3px solid var(--ink);
+  padding-bottom:10px;
+  gap:20px;
+}
+
+.logo{
+  font-family:Anton,sans-serif;
+  font-size:30px;
+  letter-spacing:2px;
+}
+
+.issue{
+  font-size:12px;
+  font-weight:700;
+  text-transform:uppercase;
+  text-align:right;
+}
+
+.cover h1{
+  font-family:Anton,sans-serif;
+  text-transform:uppercase;
+  font-size:clamp(54px,8vw,104px);
+  line-height:.86;
+  max-width:850px;
+  margin:70px 0 20px;
+  color:var(--wine);
+  text-shadow:4px 4px 0 #fff;
+  letter-spacing:-2px;
+}
+
+.cover h1::after{
+  content:"✦";
+  font-family:"DM Sans";
+  font-size:.35em;
+  color:var(--pink);
+  vertical-align:top;
+  margin-left:12px;
+}
+
+.cover .dek{
+  font-family:"Playfair Display",serif;
+  font-weight:700;
+  font-size:25px;
+  max-width:690px;
+  line-height:1.25;
+}
+
+.tag{
+  display:inline-block;
+  background:var(--purple);
+  color:white;
+  padding:7px 12px;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  border-radius:999px;
+}
+
+.cover-cards{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin-top:45px;
+  max-width:760px;
+}
+
+.cover-card{
+  background:#fff8efdd;
+  border:2px solid var(--ink);
+  padding:17px;
+  border-radius:16px;
+  box-shadow:7px 7px 0 var(--ink);
+  transform:rotate(-1deg);
+}
+
+.cover-card:nth-child(2){
+  transform:rotate(1.5deg);
+}
+
+.cover-card b{
+  color:var(--wine);
+  font-size:19px;
+}
+
+.sticker{
+  position:absolute;
+  right:65px;
+  bottom:70px;
+  width:130px;
+  height:130px;
+  border:3px solid var(--ink);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  font-weight:800;
+  background:var(--lime);
+  transform:rotate(9deg);
+  box-shadow:6px 6px 0 var(--ink);
+}
+
+.section-label{
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-weight:800;
+  color:var(--wine);
+}
+
+h2{
+  font-family:"Anton",sans-serif;
+  text-transform:uppercase;
+  font-size:60px;
+  line-height:.95;
+  margin:10px 0 25px;
+  color:var(--wine);
+  letter-spacing:-1px;
+}
+
+h3{
+  font-family:"Playfair Display",serif;
+  font-size:31px;
+  line-height:1.05;
+  margin:8px 0 15px;
+  color:var(--purple);
+}
+
+p{
+  font-size:16px;
+  line-height:1.65;
+}
+
+.lead{
+  font-size:21px;
+  line-height:1.45;
+  font-family:"Playfair Display",serif;
+}
+
+.grid2{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:38px;
+}
+
+.quote{
+  margin:25px 0;
+  padding:22px;
+  border-left:8px solid var(--pink);
+  background:#ffe0ec;
+  border-radius:0 18px 18px 0;
+  box-shadow:6px 6px 0 #0002;
+  font-family:"Playfair Display",serif;
+  font-size:25px;
+  font-weight:700;
+}
+
+.factbox{
+  background:var(--purple);
+  color:white;
+  padding:25px;
+  margin-top:20px;
+  border-radius:18px;
+}
+
+.factbox h3{
+  color:#fff;
+  margin-top:0;
+}
+
+.factbox ul{
+  line-height:1.9;
+  padding-left:20px;
+}
+
+.portrait{
+  min-height:350px;
+  border:3px solid var(--ink);
+  display:flex;
+  align-items:end;
+  padding:22px;
+  background:
+    linear-gradient(
+      145deg,
+      #c97c91,
+      #6e2948 55%,
+      #281c2d
+    );
+  color:white;
+  position:relative;
+  border-radius:22px;
+  box-shadow:9px 9px 0 var(--ink);
+}
+
+.portrait:before{
+  content:"";
+  position:absolute;
+  width:145px;
+  height:145px;
+  border-radius:50%;
+  background:#b66c63;
+  top:55px;
+  left:50%;
+  transform:translateX(-50%);
+  box-shadow:0 65px 0 28px #281d26;
+}
+
+.portrait span{
+  position:relative;
+  font-family:Anton;
+  font-size:43px;
+  letter-spacing:1px;
+}
+
+.saffioti{
+  background:
+    linear-gradient(
+      145deg,
+      #c7a4bd,
+      #493a62 60%,
+      #242030
+    );
+}
+
+.saffioti:before{
+  background:#d19a82;
+  box-shadow:0 65px 0 28px #30252d;
+}
+
+.timeline{
+  border-left:4px solid var(--wine);
+  padding-left:25px;
+}
+
+.timeline-item{
+  margin-bottom:25px;
+}
+
+.timeline-item b{
+  color:var(--wine);
+}
+
+.columns{
+  columns:2;
+  column-gap:45px;
+}
+
+.columns p{
+  break-inside:avoid;
+}
+
+.comparison{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.compare-card{
+  padding:25px;
+  border:3px solid var(--ink);
+  background:#fff;
+  border-radius:16px;
+}
+
+.compare-card:first-child{
+  background:#f5d8e2;
+}
+
+.compare-card:last-child{
+  background:#e5deee;
+}
+
+.compare-card h3{
+  color:var(--wine);
+}
+
+.quiz{
+  display:grid;
+  gap:15px;
+}
+
+.question{
+  border:2px solid var(--ink);
+  padding:18px;
+  background:#fff;
+  border-radius:14px;
+  transition:.15s;
+}
+
+.question:hover{
+  transform:translateX(5px);
+  box-shadow:5px 5px 0 var(--pink);
+}
+
+/* BOTÃO DA CRUZADINHA */
+
+.link-cruzadinha{
+  display:inline-block;
+  margin:5px 0 30px;
+  padding:14px 22px;
+
+  background:var(--lime);
+  color:var(--ink);
+
+  border:3px solid var(--ink);
+  border-radius:999px;
+
+  font-family:"DM Sans",sans-serif;
+  font-size:14px;
+  font-weight:800;
+
+  text-decoration:none;
+  text-transform:uppercase;
+
+  box-shadow:5px 5px 0 var(--ink);
+
+  transition:.15s;
+}
+
+.link-cruzadinha:hover{
+  transform:translate(3px,3px);
+  box-shadow:2px 2px 0 var(--ink);
+}
+
+.editorial{
+  font-size:18px;
+  max-width:800px;
+}
+
+.footer{
+  position:absolute;
+  bottom:20px;
+  left:58px;
+  right:58px;
+  display:flex;
+  justify-content:space-between;
+  border-top:1px solid #0006;
+  padding-top:8px;
+  font-size:11px;
+  text-transform:uppercase;
+  font-weight:700;
+}
+
+/* =========================
+   RESPONSIVO
+   ========================= */
+
+@media(max-width:750px){
+
+  .magazine{
+    width:100%;
+    margin:0;
+    border-radius:0;
+  }
+
+  .page{
+    padding:30px 24px;
+    min-height:auto;
+  }
+
+  .cover{
+    min-height:760px;
+  }
+
+  .masthead{
+    align-items:flex-start;
+  }
+
+  .issue{
+    max-width:170px;
+  }
+
+  .cover h1{
+    font-size:58px;
+    margin-top:55px;
+  }
+
+  .cover .dek{
+    font-size:20px;
+  }
+
+  .grid2,
+  .comparison,
+  .cover-cards{
+    grid-template-columns:1fr;
+  }
+
+  h2{
+    font-size:47px;
+  }
+
+  .columns{
+    columns:1;
+  }
+
+  .sticker{
+    position:relative;
+    right:auto;
+    bottom:auto;
+    margin:30px 0 0 auto;
+  }
+
+  .footer{
+    position:relative;
+    left:auto;
+    right:auto;
+    bottom:auto;
+    margin-top:35px;
+  }
+}
+
+/* =========================
+   IMPRESSÃO
+   ========================= */
+
+@media print{
+
+  body{
+    background:white;
+  }
+
+  .magazine{
+    margin:0;
+    box-shadow:none;
+    max-width:none;
+  }
+
+  .page{
+    page-break-after:always;
+    min-height:100vh;
+  }
+
+  .link-cruzadinha{
+    color:#000;
+  }
+}
+</style>
+</head>
+
+
+<body>
+
+<main class="magazine">
+
+
+<!-- =====================================================
+     CAPA
+===================================================== -->
+
+<section class="page cover">
+
+  <div class="masthead">
+
+    <div class="logo">
+      VOZES
+    </div>
+
+    <div class="issue">
+      Edição especial • Intelectuais brasileiras
+    </div>
+
+  </div>
+
+
+  <span class="tag">
+    Feminismo • Brasil • Sociedade
+  </span>
+
+
+  <h1>
+    Duas mulheres,<br>
+    duas vozes,<br>
+    uma revolução.
+  </h1>
+
+
+  <div class="dek">
+    Lélia Gonzalez e Heleieth Saffioti desafiaram as estruturas
+    de desigualdade e transformaram a maneira de pensar gênero,
+    raça, trabalho e sociedade.
+  </div>
+
+
+  <div class="cover-cards">
+
+    <div class="cover-card">
+      <b>LÉLIA GONZALEZ</b><br>
+      Raça, gênero, cultura e a experiência das mulheres negras.
+    </div>
+
+    <div class="cover-card">
+      <b>HELEIETH SAFFIOTI</b><br>
+      Patriarcado, trabalho, exploração e desigualdade de gênero.
+    </div>
+
+  </div>
+
+
+  <div class="sticker">
+    PENSAR<br>
+    TAMBÉM É<br>
+    RESISTIR
+  </div>
+
+
+  <div class="footer">
+    <span>Vozes que Rompem o Silêncio</span>
+    <span>01</span>
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     EDITORIAL
+===================================================== -->
+
+<section class="page">
+
+  <div class="section-label">
+    Editorial
+  </div>
+
+
+  <h2>
+    Por que ouvir<br>
+    essas vozes? 👀
+  </h2>
+
+
+  <div class="grid2">
+
+    <div>
+
+      <p class="lead">
+        Tem ideia que não envelhece. Ela continua provocando
+        perguntas, quebrando certezas e ajudando a entender
+        o mundo em que a gente vive.
+      </p>
+
+      <p>
+        É esse o caso do pensamento de Lélia Gonzalez e
+        Heleieth Saffioti. Duas intelectuais brasileiras com
+        trajetórias diferentes, mas que dedicaram parte
+        fundamental de suas obras a compreender as
+        desigualdades presentes na sociedade.
+      </p>
+
+      <p>
+        Esta revista apresenta suas trajetórias, suas
+        principais contribuições e a atualidade de suas ideias.
+        A ideia aqui não é só decorar nomes para a prova:
+        é entender como o conhecimento pode ajudar a questionar
+        a sociedade e enxergar o mundo com outros olhos.
+      </p>
+
+    </div>
+
+
+    <aside class="factbox">
+
+      <h3>
+        O que você vai encontrar
+      </h3>
+
+      <ul>
+        <li>Biografia e trajetória intelectual</li>
+        <li>Principais ideias de Lélia Gonzalez</li>
+        <li>Principais ideias de Heleieth Saffioti</li>
+        <li>Comparação entre suas contribuições</li>
+        <li>Opinião e reflexão</li>
+        <li>Quiz para testar seus conhecimentos</li>
+      </ul>
+
+    </aside>
+
+  </div>
+
+
+  <div class="quote">
+    “Conhecer o pensamento dessas intelectuais é também
+    conhecer uma parte importante da história do pensamento
+    social brasileiro.”
+  </div>
+
+
+  <div class="footer">
+    <span>Editorial</span>
+    <span>02</span>
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     LÉLIA
+===================================================== -->
+
+<section class="page">
+
+  <div class="section-label">
+    Grande reportagem • 01
+  </div>
+
+
+  <div class="grid2">
+
+    <div>
+
+      <h2>
+        Lélia<br>
+        Gonzalez
+      </h2>
+
+
+      <p class="lead">
+        Uma intelectual que fez perguntas difíceis — e colocou
+        raça, gênero e cultura no centro do debate brasileiro.
+      </p>
+
+
+      <p>
+        Lélia Gonzalez foi uma intelectual, antropóloga,
+        professora e ativista brasileira. Sua produção analisou
+        as relações entre racismo, sexismo e desigualdade social,
+        dando atenção especial à experiência das mulheres negras.
+      </p>
+
+
+      <p>
+        Uma das características marcantes de seu pensamento
+        foi perceber que raça e gênero não poderiam ser analisados
+        separadamente quando se tratava da realidade das mulheres
+        negras.
+      </p>
+
+
+      <p>
+        Sua obra também valorizou a cultura afro-brasileira
+        e questionou a ideia de que o Brasil seria uma sociedade
+        livre do racismo.
+      </p>
+
+
+      <div class="quote">
+        Sua contribuição ajudou a fortalecer uma leitura brasileira
+        sobre a relação entre racismo, sexismo e identidade cultural.
+      </div>
+
+    </div>
+
+
+    <div>
+
+      <div class="portrait">
+
+        <span>
+          LÉLIA<br>
+          GONZALEZ
+        </span>
+
+      </div>
+
+
+      <div class="factbox">
+
+        <h3>
+          Palavras-chave
+        </h3>
+
+        <p>
+          Racismo • Sexismo • Cultura afro-brasileira •
+          Mulheres negras • Identidade • Feminismo negro
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer">
+    <span>Grande reportagem</span>
+    <span>03</span>
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SAFFIOTI
+===================================================== -->
+
+<section class="page">
+
+  <div class="section-label">
+    Grande reportagem • 02
+  </div>
+
+
+  <div class="grid2">
+
+    <div>
+
+      <div class="portrait saffioti">
+
+        <span>
+          HELEIETH<br>
+          SAFFIOTI
+        </span>
+
+      </div>
+
+
+      <div class="factbox">
+
+        <h3>
+          Palavras-chave
+        </h3>
+
+        <p>
+          Patriarcado • Trabalho • Gênero • Violência •
+          Exploração • Desigualdade social
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div>
+
+      <h2>
+        Heleieth<br>
+        Saffioti
+      </h2>
+
+
+      <p class="lead">
+        Uma pioneira que mostrou como gênero, trabalho,
+        patriarcado e desigualdade estão muito mais conectados
+        do que parecem.
+      </p>
+
+
+      <p>
+        Heleieth Saffioti foi uma socióloga brasileira reconhecida
+        por sua contribuição aos estudos sobre a condição das
+        mulheres e as relações de gênero.
+      </p>
+
+
+      <p>
+        Seus estudos mostraram que a desigualdade entre homens
+        e mulheres não deveria ser entendida apenas como uma
+        questão individual.
+      </p>
+
+
+      <p>
+        Ela também está relacionada à forma como a sociedade
+        se organiza, ao trabalho e às relações de poder.
+      </p>
+
+
+      <p>
+        Saffioti analisou temas como exploração do trabalho
+        feminino, patriarcado e violência contra as mulheres,
+        ajudando a construir uma interpretação estrutural
+        das desigualdades.
+      </p>
+
+
+      <div class="quote">
+        A desigualdade de gênero não nasce apenas das escolhas
+        individuais: ela também é produzida por estruturas sociais.
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer">
+    <span>Grande reportagem</span>
+    <span>04</span>
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     COMPARAÇÃO
+===================================================== -->
+
+<section class="page">
+
+  <div class="section-label">
+    Análise
+  </div>
+
+
+  <h2>
+    Duas trajetórias,<br>
+    muitas conexões
+  </h2>
+
+
+  <p class="lead">
+    Lélia Gonzalez e Heleieth Saffioti partiram de perspectivas
+    diferentes, mas suas obras convergem na crítica às estruturas
+    que produzem desigualdade.
+  </p>
+
+
+  <div class="comparison">
+
+    <article class="compare-card">
+
+      <h3>
+        Lélia Gonzalez
+      </h3>
+
+      <p>
+        <b>Foco:</b> raça, gênero, cultura e experiência
+        das mulheres negras.
+      </p>
+
+      <p>
+        <b>Contribuição:</b> aproximou as discussões sobre
+        racismo e sexismo e valorizou referências afro-brasileiras
+        na interpretação da sociedade.
+      </p>
+
+      <p>
+        <b>Questão central:</b> como raça, gênero e cultura
+        se relacionam na experiência brasileira?
+      </p>
+
+    </article>
+
+
+    <article class="compare-card">
+
+      <h3>
+        Heleieth Saffioti
+      </h3>
+
+      <p>
+        <b>Foco:</b> gênero, trabalho, patriarcado,
+        exploração e violência.
+      </p>
+
+      <p>
+        <b>Contribuição:</b> analisou a desigualdade de gênero
+        como fenômeno ligado às estruturas econômicas e sociais.
+      </p>
+
+      <p>
+        <b>Questão central:</b> como as relações sociais e
+        econômicas reproduzem desigualdades entre homens e mulheres?
+      </p>
+
+    </article>
+
+  </div>
+
+
+  <div class="quote">
+    Em comum, existe uma ideia poderosa: desigualdades não
+    aparecem do nada. Elas possuem história, estruturas e
+    relações de poder.
+  </div>
+
+
+  <div class="footer">
+    <span>Análise comparativa</span>
+    <span>05</span>
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CULTURA E OPINIÃO
+===================================================== -->
+
+<section class="page">
+
+  <div class="section-label">
+    Cultura & opinião
+  </div>
+
+
+  <div class="grid2">
+
+    <div>
+
+      <h2>
+        Pra continuar<br>
+        pensando
+      </h2>
+
+
+      <h3>
+        Gênero, Patriarcado, Violência
+      </h3>
+
+
+      <p>
+        Entre as obras de Heleieth Saffioti, o livro
+        <i>Gênero, Patriarcado, Violência</i> reúne uma análise
+        das relações de gênero e das estruturas sociais
+        relacionadas à desigualdade e à violência contra as mulheres.
+      </p>
+
+
+      <p>
+        Para quem está começando a estudar o tema, a obra ajuda
+        a perceber uma coisa importante: problemas sociais não
+        aparecem do nada. Eles têm história e acontecem dentro
+        de relações de poder.
+      </p>
+
+    </div>
+
+
+    <div>
+
+      <h2>
+        Opinião
+      </h2>
+
+
+      <p class="lead">
+        O feminismo ainda é necessário?
+      </p>
+
+
+      <p>
+        Mesmo com vários avanços, ainda existem questões como
+        violência contra a mulher, desigualdade de oportunidades
+        e diferenças no mundo do trabalho. E isso afeta a vida
+        real de muita gente.
+      </p>
+
+
+      <p>
+        Por isso, conhecer intelectuais como Gonzalez e Saffioti
+        não significa apenas estudar o passado. Suas ideias
+        oferecem ferramentas para interpretar problemas atuais
+        e questionar situações que muitas vezes são tratadas
+        como naturais.
+      </p>
+
+
+      <div class="factbox">
+
+        <h3>
+          Uma pergunta para você
+        </h3>
+
+        <p>
+          Quais desigualdades presentes hoje poderiam ser
+          melhor compreendidas a partir das ideias dessas
+          duas intelectuais?
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer">
+    <span>Cultura & opinião</span>
+    <span>06</span>
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PASSATEMPO + LINK DA CRUZADINHA
+===================================================== -->
+
+<section class="page">
+
+  <div class="section-label">
+    Passatempo • pausa de 5 minutos
+  </div>
+
+
+  <h2>
+    Seu cérebro<br>
+    também merece<br>
+    um break 🧃
+  </h2>
+
+
+  <p class="lead">
+    Nem toda pausa precisa virar mais uma tela.
+    Escolha uma dessas ideias e dê um reset rapidinho.
+  </p>
+
+
+  <!-- LINK PARA A CRUZADINHA -->
+
+  <a
+    href="index.html"
+    class="link-cruzadinha"
+  >
+    🧩 JOGAR CRUZADINHA
+  </a>
+
+
+  <div class="quiz">
+
+    <div class="question">
+      <b>🎧 01. Modo música</b><br>
+      Coloque uma música que você curte e fique alguns
+      minutos sem fazer outra coisa. Só ouve. Sem scroll,
+      sem multitarefa.
+    </div>
+
+
+    <div class="question">
+      <b>🌬️ 02. Respira aí</b><br>
+      Inspire devagar pelo nariz e solte o ar lentamente.
+      Repita algumas vezes. Parece simples — e é justamente
+      essa a ideia.
+    </div>
+
+
+    <div class="question">
+      <b>📵 03. 10 minutos offline</b><br>
+      Deixe o celular longe por 10 minutos. Caminhe,
+      converse, desenhe, arrume alguma coisa ou simplesmente
+      fique de boa.
+    </div>
+
+
+    <div class="question">
+      <b>📝 04. Descarrega</b><br>
+      Escreva em uma folha tudo que está ocupando sua cabeça.
+      Não precisa ficar bonito e ninguém precisa ler. É só
+      tirar da mente e colocar no papel.
+    </div>
+
+
+    <div class="question">
+      <b>😂 05. Coisa que te faz bem</b><br>
+      Veja algo engraçado, converse com alguém que você gosta
+      ou faça um hobby. Descanso também é parte da rotina.
+    </div>
+
+  </div>
+
+
+  <div class="quote">
+    Não precisa estar “no limite” para fazer uma pausa.
+    Cuidar da cabeça também é manutenção, tipo carregar
+    a bateria. 🔋
+  </div>
+
+
+  <div class="footer">
+    <span>Passatempo • 5 minutos</span>
+    <span>07</span>
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     VIDA REAL
+===================================================== -->
+
+<section class="page">
+
+  <div class="section-label">
+    Especial • vida real
+  </div>
+
+
+  <h2>
+    Dicas mentais<br>
+    pra não surtar<br>
+    com tudo 😵‍💫
+  </h2>
+
+
+  <p class="lead">
+    Ser adolescente já vem com escola, amizades, família,
+    futuro, redes sociais e mais um milhão de coisas.
+    Você não precisa dar conta de tudo perfeitamente.
+  </p>
+
+
+  <div class="comparison">
+
+    <article class="compare-card">
+
+      <h3>
+        🧠 1. Não se cobre 24/7
+      </h3>
+
+      <p>
+        Você pode ter um dia ruim. Pode errar. Pode não estar
+        produtivo. Isso não significa que você é preguiçoso
+        ou que está “atrasado” na vida.
+      </p>
+
+    </article>
+
+
+    <article class="compare-card">
+
+      <h3>
+        📱 2. Compare menos
+      </h3>
+
+      <p>
+        Rede social mostra o destaque da vida dos outros,
+        não os bastidores. Se sair de um app te deixa pior,
+        dar um tempo dele é totalmente válido.
+      </p>
+
+    </article>
+
+
+    <article class="compare-card">
+
+      <h3>
+        🗣️ 3. Fala com alguém
+      </h3>
+
+      <p>
+        Quando alguma coisa estiver pesada demais, procure
+        alguém de confiança. Guardar tudo sozinho geralmente
+        só deixa a mochila mais pesada.
+      </p>
+
+    </article>
+
+
+    <article class="compare-card">
+
+      <h3>
+        😴 4. Sono não é perda de tempo
+      </h3>
+
+      <p>
+        Dormir, descansar e ter momentos sem fazer nada também
+        fazem parte de funcionar bem. Seu cérebro não é uma
+        máquina de produtividade.
+      </p>
+
+    </article>
+
+
+    <article class="compare-card">
+
+      <h3>
+        🎯 5. Vai por partes
+      </h3>
+
+      <p>
+        Tem um problema enorme? Quebra em pedaços menores.
+        Em vez de “preciso resolver minha vida”, pense:
+        “qual é a próxima coisa que eu consigo fazer?”
+      </p>
+
+    </article>
+
+
+    <article class="compare-card">
+
+      <h3>
+        💗 6. Seja seu próprio amigo
+      </h3>
+
+      <p>
+        Você falaria com um amigo do jeito que fala consigo
+        mesmo? Se a resposta for não, tente trocar a cobrança
+        por uma conversa mais gentil.
+      </p>
+
+    </article>
+
+  </div>
+
+
+  <div class="factbox">
+
+    <h3>
+      🚨 E quando não estiver tudo bem?
+    </h3>
+
+    <p>
+      Se a tristeza, ansiedade, falta de energia ou sensação
+      de estar sobrecarregado estiver atrapalhando sua rotina,
+      converse com um adulto de confiança e procure ajuda
+      profissional. Pedir ajuda não é fraqueza — é cuidado.
+    </p>
+
+  </div>
+
+
+  <div class="quote">
+    Você não precisa ter tudo resolvido aos 16 anos.
+    Sério. A vida não é uma prova com prazo de entrega. 💜
+  </div>
+
+
+  <div class="footer">
+    <span>Especial • saúde emocional</span>
+    <span>08</span>
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ENCERRAMENTO
+===================================================== -->
+
+<section class="page">
+
+  <div class="section-label">
+    Encerramento
+  </div>
+
+
+  <h2>
+    E essa história<br>
+    continua ✦
+  </h2>
+
+
+  <p class="lead">
+    Lélia Gonzalez e Heleieth Saffioti deixaram contribuições
+    que ultrapassam as páginas de seus livros.
+  </p>
+
+
+  <div class="columns">
+
+    <p>
+      Suas pesquisas ajudaram a questionar desigualdades que
+      durante muito tempo foram vistas como naturais ou inevitáveis.
+      Ao estudar gênero, raça, trabalho, cultura e relações de
+      poder, elas mostraram que a sociedade pode — e deve —
+      ser analisada de forma crítica.
+    </p>
+
+
+    <p>
+      Lélia Gonzalez tornou-se uma referência fundamental para
+      compreender as experiências das mulheres negras e as
+      particularidades do racismo e do sexismo no Brasil.
+      Heleieth Saffioti contribuiu para compreender como gênero,
+      patriarcado e relações econômicas se conectam.
+    </p>
+
+
+    <p>
+      Estudar essas duas intelectuais também é reconhecer a
+      importância da produção de conhecimento feita por mulheres
+      brasileiras e perceber que ideias acadêmicas podem dialogar
+      diretamente com problemas cotidianos.
+    </p>
+
+
+    <p>
+      Mais do que chegar a respostas definitivas, esta revista
+      propõe novas perguntas: quais estruturas ainda precisam
+      ser transformadas? Quem ainda não está sendo ouvido?
+      E como o conhecimento pode contribuir para uma sociedade
+      mais igualitária?
+    </p>
+
+  </div>
+
+
+  <div class="factbox">
+
+    <h3>
+      Referências para aprofundamento
+    </h3>
+
+    <p>
+      Lélia Gonzalez — textos e estudos sobre racismo,
+      gênero, cultura e feminismo negro.
+    </p>
+
+    <p>
+      Heleieth Saffioti — <i>Gênero, Patriarcado, Violência</i>
+      e outros estudos sobre condição feminina, trabalho e
+      relações de gênero.
+    </p>
+
+    <p>
+      <b>Observação:</b> para a entrega escolar, acrescente
+      as referências bibliográficas e links/fontes exigidos
+      pelo professor.
+    </p>
+
+  </div>
+
+
+  <div class="footer">
+    <span>Vozes que Rompem o Silêncio • Fim da edição</span>
+    <span>09</span>
+  </div>
+
+</section>
+
+
+</main>
+
+</body>
+</html>

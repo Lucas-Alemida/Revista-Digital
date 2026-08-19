@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cruzadinha • Vozes que Rompem o Silêncio</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700;800&display=swap');
+
+:root{
+  --wine:#641b3a;
+  --pink:#d95b82;
+  --cream:#fff7ef;
+  --ink:#211b1d;
+  --purple:#4e3b69;
+  --lime:#c9f36b;
+  --lavender:#d9d0ff;
+  --green:#6b9e58;
+  --red:#c94c5c;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+
+  background:
+    radial-gradient(circle at 10% 15%,#c9f36b 0 4%,transparent 4.5%),
+    radial-gradient(circle at 90% 25%,#bca9ff 0 7%,transparent 7.5%),
+    radial-gradient(circle at 80% 85%,#d95b82 0 5%,transparent 5.5%),
+    linear-gradient(135deg,#d9d0ff,#ffd9e8 50%,#dff7df);
+
+  color:var(--ink);
+  font-family:"DM Sans",sans-serif;
+}
+
+.container{
+  width:min(1100px,calc(100% - 30px));
+  margin:30px auto;
+  padding:40px;
+
+  background:var(--cream);
+
+  border-radius:22px;
+
+  box-shadow:0 20px 60px #0003;
+}
+
+.top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:20px;
+
+  padding-bottom:15px;
+
+  border-bottom:3px solid var(--ink);
+}
+
+.logo{
+  font-family:"Anton",sans-serif;
+  font-size:30px;
+  letter-spacing:2px;
+}
+
+.back{
+  display:inline-block;
+
+  padding:9px 15px;
+
+  border:2px solid var(--ink);
+  border-radius:999px;
+
+  background:var(--lime);
+
+  color:var(--ink);
+
+  font-weight:800;
+  text-decoration:none;
+
+  box-shadow:4px 4px 0 var(--ink);
+
+  transition:.15s;
+}
+
+.back:hover{
+  transform:translate(3px,3px);
+  box-shadow:1px 1px 0 var(--ink);
+}
+
+.tag{
+  display:inline-block;
+
+  margin-top:30px;
+  padding:7px 13px;
+
+  border-radius:999px;
+
+  background:var(--purple);
+
+  color:white;
+
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:1px;
+
+  text-transform:uppercase;
+}
+
+h1{
+  margin:20px 0 8px;
+
+  font-family:"Anton",sans-serif;
+
+  font-size:clamp(55px,8vw,90px);
+  line-height:.9;
+
+  text-transform:uppercase;
+
+  color:var(--wine);
+}
+
+.subtitle{
+  max-width:700px;
+
+  margin:0 0 30px;
+
+  font-family:"Playfair Display",serif;
+
+  font-size:20px;
+  line-height:1.4;
+}
+
+/* =========================
+   JOGO
+   ========================= */
+
+.game{
+  display:grid;
+
+  grid-template-columns:minmax(400px,560px) 1fr;
+
+  gap:45px;
+
+  align-items:start;
+}
+
+.board-wrapper{
+  padding:20px;
+
+  background:#f4d8e1;
+
+  border:3px solid var(--ink);
+  border-radius:18px;
+
+  box-shadow:8px 8px 0 var(--ink);
+}
+
+.board{
+  display:grid;
+
+  grid-template-columns:repeat(15,1fr);
+  grid-template-rows:repeat(15,1fr);
+
+  width:100%;
+  aspect-ratio:1;
+
+  background:var(--ink);
+
+  border:2px solid var(--ink);
+}
+
+.cell{
+  position:relative;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  min-width:0;
+  min-height:0;
+
+  background:white;
+
+  border:1px solid #0004;
+}
+
+.cell.black{
+  background:var(--ink);
+  border-color:var(--ink);
+}
+
+.cell input{
+  width:100%;
+  height:100%;
+
+  border:0;
+  outline:0;
+
+  background:transparent;
+
+  text-align:center;
+
+  font-family:"Anton",sans-serif;
+  font-size:clamp(13px,2.8vw,24px);
+
+  text-transform:uppercase;
+
+  color:var(--wine);
+
+  caret-color:var(--pink);
+}
+
+.cell input:focus{
+  background:#ffe0ec;
+}
+
+.cell.number::before{
+  content:attr(data-number);
+
+  position:absolute;
+
+  top:2px;
+  left:3px;
+
+  z-index:2;
+
+  font-size:8px;
+  line-height:1;
+
+  font-weight:800;
+
+  color:var(--ink);
+
+  pointer-events:none;
+}
+
+.cell.correct{
+  background:#dff2d5;
+}
+
+.cell.wrong{
+  background:#ffd5da;
+}
+
+.cell.correct input{
+  color:var(--green);
+}
+
+.cell.wrong input{
+  color:var(--red);
+}
+
+/* =========================
+   PERGUNTAS
+   ========================= */
+
+.clues{
+  display:grid;
+
+  gap:18px;
+}
+
+.clue-box{
+  padding:20px;
+
+  border:3px solid var(--ink);
+  border-radius:16px;
+
+  background:white;
+
+  box-shadow:5px 5px 0 #0002;
+}
+
+.clue-box h2{
+  margin:0 0 12px;
+
+  font-family:"Anton",sans-serif;
+
+  font-size:32px;
+  line-height:1;
+
+  color:var(--wine);
+
+  text-transform:uppercase;
+}
+
+.clue{
+  margin-bottom:14px;
+
+  font-size:14px;
+  line-height:1.45;
+}
+
+.clue:last-child{
+  margin-bottom:0;
+}
+
+.clue b{
+  color:var(--wine);
+}
+
+/* =========================
+   BOTÕES
+   ========================= */
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+
+  gap:12px;
+
+  margin-top:25px;
+}
+
+button{
+  padding:12px 18px;
+
+  border:3px solid var(--ink);
+  border-radius:999px;
+
+  background:var(--lime);
+
+  color:var(--ink);
+
+  font-family:"DM Sans",sans-serif;
+
+  font-size:14px;
+  font-weight:800;
+
+  cursor:pointer;
+
+  box-shadow:5px 5px 0 var(--ink);
+
+  transition:.15s;
+}
+
+button:hover{
+  transform:translate(3px,3px);
+  box-shadow:2px 2px 0 var(--ink);
+}
+
+button.secondary{
+  background:#fff;
+}
+
+/* =========================
+   RESULTADO
+   ========================= */
+
+.result{
+  display:none;
+
+  margin-top:25px;
+
+  padding:20px;
+
+  border-radius:16px;
+
+  background:var(--purple);
+
+  color:white;
+
+  text-align:center;
+}
+
+.result.show{
+  display:block;
+}
+
+.result strong{
+  display:block;
+
+  margin-bottom:5px;
+
+  font-family:"Anton",sans-serif;
+
+  font-size:30px;
+
+  text-transform:uppercase;
+}
+
+/* =========================
+   DICA
+   ========================= */
+
+.tip{
+  margin-top:20px;
+
+  padding:17px 20px;
+
+  border-left:7px solid var(--pink);
+
+  border-radius:0 15px 15px 0;
+
+  background:#ffe0ec;
+
+  font-family:"Playfair Display",serif;
+
+  font-weight:700;
+
+  line-height:1.4;
+}
+
+/* =========================
+   RESPONSIVO
+   ========================= */
+
+@media(max-width:900px){
+
+  .container{
+    padding:30px 25px;
+  }
+
+  .game{
+    grid-template-columns:1fr;
+  }
+
+  .board-wrapper{
+    max-width:650px;
+    margin:auto;
+  }
+
+}
+
+@media(max-width:600px){
+
+  body{
+    background:var(--cream);
+  }
+
+  .container{
+    width:100%;
+    margin:0;
+
+    padding:24px 18px;
+
+    border-radius:0;
+
+    box-shadow:none;
+  }
+
+  .top{
+    align-items:flex-start;
+  }
+
+  .logo{
+    font-size:25px;
+  }
+
+  .back{
+    font-size:12px;
+  }
+
+  h1{
+    font-size:55px;
+  }
+
+  .subtitle{
+    font-size:17px;
+  }
+
+  .board-wrapper{
+    padding:10px;
+  }
+
+  .clue-box{
+    padding:16px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main class="container">
+
+  <header class="top">
+
+    <div class="logo">
+      VOZES
+    </div>
+
+    <a
+      class="back"
+      href="revista_vozes_que_rompem_o_silencio%20brabao.html"
+    >
+      ← Voltar para a revista
+    </a>
+
+  </header>
+
+
+  <span class="tag">
+    Passatempo • Intelectuais brasileiras
+  </span>
+
+
+  <h1>
+    Cruzadinha 🧩
+  </h1>
+
+  <p class="subtitle">
+    Teste o que você aprendeu sobre Lélia Gonzalez, Heleieth Saffioti, feminismo, gênero, raça e sociedade.
+  </p>
+
+
+  <section class="game">
+
+    <div>
+
+      <div class="board-wrapper">
+
+        <div
+          id="board"
+          class="board"
+          aria-label="Cruzadinha"
+        ></div>
+
+      </div>
+
+
+      <div class="actions">
+
+        <button onclick="checkAnswers()">
+          ✓ Verificar respostas
+        </button>
+
+        <button
+          class="secondary"
+          onclick="clearBoard()"
+        >
+          ↻ Limpar
+        </button>
+
+        <button
+          class="secondary"
+          onclick="showAnswers()"
+        >
+          💡 Mostrar respostas
+        </button>
+
+      </div>
+
+
+      <div
+        id="result"
+        class="result"
+      ></div>
+
+
+      <div class="tip">
+        Dica: as respostas devem ser escritas sem acentos e sem espaços.
+      </div>
+
+    </div>
+
+
+    <aside class="clues">
+
+      <div class="clue-box">
+
+        <h2>
+          Horizontais
+        </h2>
+
+        <div class="clue">
+          <b>1.</b>
+          Intelectual brasileira que estudou raça, gênero e cultura afro-brasileira.
+        </div>
+
+        <div class="clue">
+          <b>2.</b>
+          Sistema social relacionado à dominação masculina estudado por Saffioti.
+        </div>
+
+        <div class="clue">
+          <b>3.</b>
+          Categoria social fundamental para compreender as desigualdades entre homens e mulheres.
+        </div>
+
+        <div class="clue">
+          <b>4.</b>
+          Relação de poder e discriminação baseada na raça.
+        </div>
+
+        <div class="clue">
+          <b>5.</b>
+          Área analisada por Saffioti em relação à desigualdade feminina.
+        </div>
+
+      </div>
+
+
+      <div class="clue-box">
+
+        <h2>
+          Verticais
+        </h2>
+
+        <div class="clue">
+          <b>6.</b>
+          Socióloga brasileira autora de importantes estudos sobre a condição feminina.
+        </div>
+
+        <div class="clue">
+          <b>7.</b>
+          Movimento social que questiona desigualdades entre homens e mulheres.
+        </div>
+
+        <div class="clue">
+          <b>8.</b>
+          Conjunto de práticas e significados valorizado por Lélia Gonzalez em seus estudos.
+        </div>
+
+        <div class="clue">
+          <b>9.</b>
+          Forma de violência que também pode estar relacionada às estruturas de poder.
+        </div>
+
+        <div class="clue">
+          <b>10.</b>
+          Nome dado à diferença injusta de oportunidades e condições sociais.
+        </div>
+
+      </div>
+
+    </aside>
+
+  </section>
+
+</main>
+
+
+<script>
+
+/*
+===========================================================
+  CRUZADINHA
+
+  Palavras:
+
+  HORIZONTAIS
+  1 GONZALEZ
+  2 PATRIARCADO
+  3 GENERO
+  4 RACISMO
+  5 TRABALHO
+
+  VERTICAIS
+  6 SAFFIOTI
+  7 FEMINISMO
+  8 CULTURA
+  9 VIOLENCIA
+  10 DESIGUALDADE
+===========================================================
+*/
+
+
+const size = 15;
+
+
+/*
+  Cada palavra possui:
+
+  word  = resposta
+  row   = linha inicial
+  col   = coluna inicial
+  dir   = direção
+  num   = número da questão
+*/
+
+const words = [
+
+  {
+    word:"GONZALEZ",
+    row:1,
+    col:4,
+    dir:"H",
+    num:1
+  },
+
+  {
+    word:"PATRIARCADO",
+    row:4,
+    col:1,
+    dir:"H",
+    num:2
+  },
+
+  {
+    word:"GENERO",
+    row:8,
+    col:5,
+    dir:"H",
+    num:3
+  },
+
+  {
+    word:"RACISMO",
+    row:11,
+    col:2,
+    dir:"H",
+    num:4
+  },
+
+  {
+    word:"TRABALHO",
+    row:13,
+    col:5,
+    dir:"H",
+    num:5
+  },
+
+  {
+    word:"SAFFIOTI",
+    row:4,
+    col:5,
+    dir:"V",
+    num:6
+  },
+
+  {
+    word:"FEMINISMO",
+    row:3,
+    col:11,
+    dir:"V",
+    num:7
+  },
+
+  {
+    word:"CULTURA",
+    row:6,
+    col:8,
+    dir:"V",
+    num:8
+  },
+
+  {
+    word:"VIOLENCIA",
+    row:7,
+    col:13,
+    dir:"V",
+    num:9
+  },
+
+  {
+    word:"DESIGUALDADE",
+    row:1,
+    col:1,
+    dir:"V",
+    num:10
+  }
+
+];
+
+
+const board = document.getElementById("board");
+
+
+/*
+  Guarda as células utilizadas
+*/
+const cells = {};
+
+
+/*
+  Cria uma chave para cada posição.
+*/
+function key(row,col){
+
+  return row + "-" + col;
+
+}
+
+
+/*
+  Coloca uma palavra no tabuleiro.
+*/
+words.forEach(item => {
+
+  for(let i=0;i<item.word.length;i++){
+
+    let row = item.row;
+    let col = item.col;
+
+    if(item.dir === "H"){
+      col += i;
+    }else{
+      row += i;
+    }
+
+    if(
+      row < 1 ||
+      row > size ||
+      col < 1 ||
+      col > size
+    ){
+      continue;
+    }
+
+    const k = key(row,col);
+
+    if(!cells[k]){
+
+      cells[k] = {
+        letters:[],
+        numbers:[]
+      };
+
+    }
+
+    cells[k].letters.push(item.word[i]);
+
+    if(i === 0){
+
+      cells[k].numbers.push(item.num);
+
+    }
+
+  }
+
+});
+
+
+/*
+  Cria visualmente o tabuleiro.
+*/
+
+for(let row=1;row<=size;row++){
+
+  for(let col=1;col<=size;col++){
+
+    const k = key(row,col);
+
+    const cell = document.createElement("div");
+
+    cell.classList.add("cell");
+
+    if(!cells[k]){
+
+      cell.classList.add("black");
+
+    }else{
+
+      if(cells[k].numbers.length){
+
+        cell.classList.add("number");
+
+        cell.dataset.number =
+          cells[k].numbers.join("/");
+      }
+
+
+      const input =
+        document.createElement("input");
+
+      input.type = "text";
+
+      input.maxLength = 1;
+
+      input.autocomplete = "off";
+
+      input.setAttribute(
+        "aria-label",
+        "Letra da cruzadinha"
+      );
+
+
+      input.addEventListener(
+        "input",
+        function(){
+
+          this.value =
+            this.value
+              .normalize("NFD")
+              .replace(/[\u0300-\u036f]/g,"")
+              .replace(/[^a-zA-Z]/g,"")
+              .toUpperCase();
+
+          cell.classList.remove(
+            "correct",
+            "wrong"
+          );
+
+        }
+      );
+
+
+      cell.appendChild(input);
+
+    }
+
+    board.appendChild(cell);
+
+  }
+
+}
+
+
+/*
+===========================================================
+  VERIFICAR
+===========================================================
+*/
+
+function checkAnswers(){
+
+  let total = 0;
+  let correct = 0;
+
+  Object.keys(cells).forEach(k => {
+
+    const cell =
+      board.children[
+        getIndex(k)
+      ];
+
+    if(!cell) return;
+
+    const input =
+      cell.querySelector("input");
+
+    if(!input) return;
+
+    total++;
+
+    const expected =
+      cells[k].letters[0];
+
+    const value =
+      input.value.toUpperCase();
+
+
+    if(value === expected){
+
+      cell.classList.remove("wrong");
+
+      cell.classList.add("correct");
+
+      correct++;
+
+    }else{
+
+      cell.classList.remove("correct");
+
+      if(value){
+
+        cell.classList.add("wrong");
+
+      }
+
+    }
+
+  });
+
+
+  const result =
+    document.getElementById("result");
+
+  result.classList.add("show");
+
+
+  if(correct === total){
+
+    result.innerHTML = `
+      <strong>🎉 Mandou bem!</strong>
+      Você completou toda a cruzadinha!
+    `;
+
+  }else{
+
+    result.innerHTML = `
+      <strong>${correct} / ${total}</strong>
+      Algumas letras ainda precisam ser corrigidas.
+    `;
+
+  }
+
+}
+
+
+/*
+  Converte posição em índice do grid.
+*/
+
+function getIndex(k){
+
+  const parts = k.split("-");
+
+  const row =
+    parseInt(parts[0]);
+
+  const col =
+    parseInt(parts[1]);
+
+  return (row - 1) * size + (col - 1);
+
+}
+
+
+/*
+===========================================================
+  LIMPAR
+===========================================================
+*/
+
+function clearBoard(){
+
+  document
+    .querySelectorAll(".cell input")
+    .forEach(input => {
+
+      input.value = "";
+
+    });
+
+
+  document
+    .querySelectorAll(".cell")
+    .forEach(cell => {
+
+      cell.classList.remove(
+        "correct",
+        "wrong"
+      );
+
+    });
+
+
+  document
+    .getElementById("result")
+    .classList.remove("show");
+
+}
+
+
+/*
+===========================================================
+  MOSTRAR RESPOSTAS
+===========================================================
+*/
+
+function showAnswers(){
+
+  Object.keys(cells).forEach(k => {
+
+    const cell =
+      board.children[
+        getIndex(k)
+      ];
+
+    if(!cell) return;
+
+    const input =
+      cell.querySelector("input");
+
+    if(!input) return;
+
+    input.value =
+      cells[k].letters[0];
+
+    cell.classList.remove("wrong");
+
+    cell.classList.add("correct");
+
+  });
+
+
+  const result =
+    document.getElementById("result");
+
+  result.classList.add("show");
+
+  result.innerHTML = `
+    <strong>💡 Respostas reveladas</strong>
+    Agora você pode conferir todas as palavras.
+  `;
+
+}
+
+</script>
+
+</body>
+</html>
